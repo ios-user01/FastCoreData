@@ -1,6 +1,16 @@
-# CategoryUtils
+# FastCoreData
 
- Intended to help you getting your IOS applications off the ground quickly, by offering categories classes that wrap a lot of the boilerplate that’s involved when writing IOS apps.
+Intended to help you getting your CoreData IOS applications off the ground quickly, by offering categories classes and class methods that wrap a lot of the boilerplate that’s involved when writing IOS apps which use CoreData.
+
+<p align="center">
+  <img src="http://zbutton.files.wordpress.com/2011/03/macosx_data_coredata_20090925.png" alt="Sublime's custom image"/>
+</p>
+```html
+<html>
+ <center><img src="></center>
+ </html>
+```
+
  
 ### Version
 1.0.0
@@ -38,20 +48,20 @@ To savé background context to the main context:
 ### Insert
 ----------
 
-You can insert objects passing a NSDictionary (e.g: JSON from some webservice) as an argument as follows:
+You can insert objects passing dictionary (e.g: JSON from some webservice) as an argument as follows:
  ```sh
 NSMutableDictionary *dog = [NSMutableDictionary new];
     dog[@"name"] = @"Snopy";
     dog[@"age"] = @"7";
 NSManagedObjectContext* mainContext = [NSManagedObjectContext mainContext];
-[Dog CA_insertFromJsonDictionary:dogDictionary inManagedObjectContext:mainContext];
+[Dog CA_insertFromJsonDictionary:dogDictionary inManagedObjectContext:mainContext error:nil];
 ```
 And you can do the reverse operation:
  ```sh
  NSDictionary *diciontaryFromManagedObject = [aDog CA_dictionaryFromManagedObject];
 inManagedObjectContext:mainContext error:nil];
 ```
-### Fetch
+### Fecth
 --------
 
 If have a Dog Entity and you need to get all the dogs:
@@ -70,6 +80,6 @@ Dog *dustyDog = [dustyDogs objectAtIndex:0];
 If you want delete all dogs:
  ```sh
 NSManagedObjectContext* mainContext = [NSManagedObjectContext mainContext];
-[Dog CA_deleteAllInContext:mainContext];
+ [Dog CA_deleteAllInContext:mainContext];
 ```
 
