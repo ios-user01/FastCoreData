@@ -56,7 +56,7 @@ And you can do the reverse operation:
  NSDictionary *diciontaryFromManagedObject = [aDog CA_dictionaryFromManagedObject];
 inManagedObjectContext:mainContext error:nil];
 ```
-### Fecth
+### Fetch
 --------
 
 If have a Dog Entity and you need to get all the dogs:
