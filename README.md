@@ -88,11 +88,14 @@ Steps to create a integer transformer:
 
 1 - In CoreData model add the following fields to the user info of a property of type integer:
 
+ ```sh
 Key: JsonTransformerName (Always the same)
 Value: IntegerTransformer
+```
 
 2 - Create a conversion method
 
+ ```sh
 + (NSValueTransformer *) stringToIntegerTransfomer {
     NSValueTransformer *transformer = [CA_ValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *value) {
         if (value) {
@@ -106,9 +109,11 @@ Value: IntegerTransformer
     
     return transformer;
 }
+```
 
 3 -  Register transformer
 
+```sh
 NSValueTransformer aStringToIntegerTransfomer = [ValueTransformerGenerator stringToIntegerTransfomer];
     [NSValueTransformer setValueTransformer:aStringToIntegerTransfomer forName:@"IntegerTransformer"];
-
+```
