@@ -5,11 +5,6 @@ Intended to help you getting your CoreData IOS applications off the ground quick
 <p align="center">
   <img src="http://zbutton.files.wordpress.com/2011/03/macosx_data_coredata_20090925.png" alt="Sublime's custom image"/>
 </p>
-```html
-<html>
- <center><img src="></center>
- </html>
-```
 
  
 ### Version
