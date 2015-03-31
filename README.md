@@ -81,7 +81,7 @@ NSManagedObjectContext* mainContext = [NSManagedObjectContext mainContext];
 ### Transformers
 --------
 
-If you want to automatically persist data in JSON format with the aid of CA_insertFromJsonDictionary method then you must create transformers for dates and numbers.
+If you want to automatically persist data in JSON format with the aid of CA_insertFromJsonDictionary method then you must create transformers for dates and numbers conversions.
 
 
 Steps to create a integer transformer:
