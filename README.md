@@ -43,7 +43,7 @@ To savé background context to the main context:
 ### Insert
 ----------
 
-You can insert objects passing dictionary (e.g: JSON from some webservice) as an argument as follows:
+You can insert objects passing dictionary (see Transformers Section below) as an argument as follows:
  ```sh
 NSMutableDictionary *dog = [NSMutableDictionary new];
     dog[@"name"] = @"Snopy";
@@ -77,4 +77,38 @@ If you want delete all dogs:
 NSManagedObjectContext* mainContext = [NSManagedObjectContext mainContext];
  [Dog CA_deleteAllInContext:mainContext];
 ```
+
+### Transformers
+--------
+
+If you want to automatically persist data in JSON format with the aid of CA_insertFromJsonDictionary method then you must create transformers for dates and numbers.
+
+
+Steps to create a integer transformer:
+
+1 - In CoreData model add the following fields to the user info of a property of type integer:
+
+Key: JsonTransformerName (Always the same)
+Value: IntegerTransformer
+
+2 - Create a conversion method
+
++ (NSValueTransformer *) stringToIntegerTransfomer {
+    NSValueTransformer *transformer = [CA_ValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *value) {
+        if (value) {
+            return @([value integerValue]);
+        }
+        
+        return nil;
+    } reverseBlock:^id(NSNumber *value) {
+        return [value stringValue];
+    }];
+    
+    return transformer;
+}
+
+3 -  Register transformer
+
+NSValueTransformer aStringToIntegerTransfomer = [ValueTransformerGenerator stringToIntegerTransfomer];
+    [NSValueTransformer setValueTransformer:aStringToIntegerTransfomer forName:@"IntegerTransformer"];
 
