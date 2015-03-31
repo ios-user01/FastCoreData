@@ -85,7 +85,7 @@ If you want to automatically persist data in JSON format with the aid of CA_inse
 
 Steps to create a integer transformer:
 
-1 - In CoreData model add the following fields to the user info of a property of type integer:
+1 - In CoreData model add the following fields to the user info of a property type integer:
 
  ```sh
 Key: JsonTransformerName (Always the same)
