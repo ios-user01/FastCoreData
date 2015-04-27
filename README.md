@@ -15,7 +15,7 @@ Intended to help you getting your CoreData IOS applications off the ground quick
 ### Initialization
 
  You need to set the model name before first use. Typically in application:didFinishLaunchingWithOptions:
- ```sh
+ ```objc
 [[CA_CoreData shared] setModelName:@"CategoryUtilsModel"];
 ```
 ### Contexts
@@ -25,26 +25,26 @@ You can get main Context as follows:
 NSManagedObjectContext* mainContext = [NSManagedObjectContext mainContext];
 ```
 If want background context instead you can do::
- ```sh
+ ```objc
 NSManagedObjectContext* backgroundContext = [NSManagedObjectContext backgroundContext];
 ```
 The background context is run on private dispatch queues, so any operations on them should be wrapped in a performBlock:
 NSManagedObjectContext* context = [NSManagedObjectContext backgroundContext];
- ```sh
+ ```objc
 NSManagedObjectContext* context = [NSManagedObjectContext backgroundContext];
 [context performBlock:^{
     // insert or fetch new data in background.
 }];
 ```
 To savé background context to the main context:
- ```sh
+ ```objc
  [backgroundContext saveToMainContext];
 ```
 ### Insert
 ----------
 
-You can insert objects passing dictionary (e.g: JSON from some webservice) as an argument as follows:
- ```sh
+You can insert objects passing dictionary (see Transformers Section below) as an argument as follows:
+ ```objc
 NSMutableDictionary *dog = [NSMutableDictionary new];
     dog[@"name"] = @"Snopy";
     dog[@"age"] = @"7";
@@ -56,15 +56,15 @@ And you can do the reverse operation:
  NSDictionary *diciontaryFromManagedObject = [aDog CA_dictionaryFromManagedObject];
 inManagedObjectContext:mainContext error:nil];
 ```
-### Fecth
+### Fetch
 --------
 
 If have a Dog Entity and you need to get all the dogs:
- ```sh
+ ```objc
 [Dog CA_fetchAllInContext:mainContext];
 ```
 If you want a dog that has the name "Snopy":
- ```sh
+ ```objc
 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@",@"Snopy"];
 NSArray *dustyDogs = [Dog CA_fetchByPredicate:predicate inContext:mainContext];
 Dog *dustyDog = [dustyDogs objectAtIndex:0];
@@ -73,8 +73,46 @@ Dog *dustyDog = [dustyDogs objectAtIndex:0];
 -------
 
 If you want delete all dogs:
- ```sh
+ ```objc
 NSManagedObjectContext* mainContext = [NSManagedObjectContext mainContext];
  [Dog CA_deleteAllInContext:mainContext];
 ```
 
+### Transformers
+--------
+
+If you want to automatically persist data in JSON format with the aid of CA_insertFromJsonDictionary method then you must create transformers to conversions of dates and numbers
+
+Steps to create a integer transformer:
+
+1 - In CoreData model add the following fields to the user info of a property type integer:
+
+ ```objc
+Key: JsonTransformerName (Always the same)
+Value: IntegerTransformer
+```
+
+2 - Create a conversion method
+
+ ```objc
++ (NSValueTransformer *) stringToIntegerTransfomer {
+    NSValueTransformer *transformer = [CA_ValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *value) {
+        if (value) {
+            return @([value integerValue]);
+        }
+        
+        return nil;
+    } reverseBlock:^id(NSNumber *value) {
+        return [value stringValue];
+    }];
+    
+    return transformer;
+}
+```
+
+3 -  Register transformer
+
+```objc
+NSValueTransformer aStringToIntegerTransfomer = [ValueTransformerGenerator stringToIntegerTransfomer];
+    [NSValueTransformer setValueTransformer:aStringToIntegerTransfomer forName:@"IntegerTransformer"];
+```
