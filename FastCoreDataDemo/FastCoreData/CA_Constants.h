@@ -22,6 +22,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const CA_jsonKeyPathKey;
+extern NSString * const CA_webserviceUniqueIdentifier;
 extern NSString * const CA_jsonTransformerNameKey;
-extern NSString * const CA_identityAttributeKey;
+extern NSString * const CA_coredataUniqueIdentifier;

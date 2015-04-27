@@ -1,6 +1,6 @@
-// NSDictionary+CategoryUtils.m
+// UIKit+AFNetworking.h
 //
-// Copyright (c) 2014 Tiago Flores
+// Copyright (c) 2013 AFNetworking (http://afnetworking.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,27 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NSDictionary+CategoryUtils.h"
-#import "NSPropertyDescription+CategoryUtils.h"
-#import "NSAttributeDescription+CategoryUtils.h"
+#import <UIKit/UIKit.h>
 
-@implementation NSDictionary (CategoryUtils)
+#ifndef _UIKIT_AFNETWORKING_
+    #define _UIKIT_AFNETWORKING_
 
-- (id)CA_valueForJsonAttribute:(NSAttributeDescription *)attribute {
-    id value = [self valueForKeyPath:[attribute CA_webserviceUniqueIdentifier]];
-    
-    if ([value isEqual:NSNull.null]) {
-        value = nil;
-    }
-    
-    if (value != nil) {
-        NSValueTransformer *transformer = [attribute CA_jsonTransformer];
-        if (transformer) {
-            value = [transformer transformedValue:value];
-        }
-    }
-    
-    return value;
-}
+    #import "AFNetworkActivityIndicatorManager.h"
 
-@end
+    #import "UIActivityIndicatorView+AFNetworking.h"
+    #import "UIAlertView+AFNetworking.h"
+    #import "UIButton+AFNetworking.h"
+    #import "UIImageView+AFNetworking.h"
+    #import "UIKit+AFNetworking.h"
+    #import "UIProgressView+AFNetworking.h"
+    #import "UIRefreshControl+AFNetworking.h"
+    #import "UIWebView+AFNetworking.h"
+#endif /* _UIKIT_AFNETWORKING_ */

@@ -29,14 +29,14 @@ static BOOL CA_isNullKeyPath(NSString *keyPath) {
 
 @implementation NSPropertyDescription (CategoryUtils)
 
-- (NSString *)CA_jsonKeyPath {
-    NSString *jsonKeyPath = self.userInfo[CA_jsonKeyPathKey];
+- (NSString *)CA_webserviceUniqueIdentifier {
+    NSString *webserviceUniqueIdentifier = self.userInfo[CA_webserviceUniqueIdentifier];
     
-    if (CA_isNullKeyPath(jsonKeyPath)) {
+    if (CA_isNullKeyPath(webserviceUniqueIdentifier)) {
         return nil;
     }
     
-    return jsonKeyPath ? : self.name;
+    return webserviceUniqueIdentifier ? : self.name;
 }
 
 @end

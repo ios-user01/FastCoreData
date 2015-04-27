@@ -24,6 +24,6 @@
 
 @interface NSPropertyDescription (CategoryUtils)
 
-- (NSString *)CA_jsonKeyPath;
+- (NSString *)CA_webserviceUniqueIdentifier;
 
 @end

@@ -25,18 +25,18 @@
 
 @implementation NSEntityDescription (CategoryUtils)
 
-- (NSAttributeDescription *)CA_identityAttribute {
+- (NSAttributeDescription *)CA_coredataUniqueIdentifier {
 	
-	NSString *identityAttribute = nil;
+	NSString *coredataUniqueIdentifier = nil;
 	NSEntityDescription *entityDescription = self;
 	
-	while (entityDescription && !identityAttribute) {
-		identityAttribute = entityDescription.userInfo[CA_identityAttributeKey];
+	while (entityDescription && !coredataUniqueIdentifier) {
+		coredataUniqueIdentifier = entityDescription.userInfo[CA_coredataUniqueIdentifier];
 		entityDescription = entityDescription.superentity;
 	}
 	
-	if (identityAttribute) {
-		return self.attributesByName[identityAttribute];
+	if (coredataUniqueIdentifier) {
+		return self.attributesByName[coredataUniqueIdentifier];
 	}
 	
 	return nil;

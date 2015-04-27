@@ -22,6 +22,6 @@
 
 #import "CA_Constants.h"
 
-NSString * const CA_jsonKeyPathKey = @"JsonKeyPath";
+NSString * const CA_webserviceUniqueIdentifier = @"JsonKeyPath";
 NSString * const CA_jsonTransformerNameKey = @"JsonTransformerName";
-NSString * const CA_identityAttributeKey = @"identityAttribute";
+NSString * const CA_coredataUniqueIdentifier = @"identityAttribute";

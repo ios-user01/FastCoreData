@@ -118,7 +118,7 @@
     [context performBlockAndWait:^{
         NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
         
-        NSAttributeDescription *identityAttribute = [entity CA_identityAttribute];
+        NSAttributeDescription *identityAttribute = [entity CA_coredataUniqueIdentifier];
         NSAssert(identityAttribute != nil, @"An identity attribute must be specified in order to merge objects");
         
         NSMutableArray *identifiers = [NSMutableArray arrayWithCapacity:JsonArray.count];
@@ -261,7 +261,6 @@
                                                NSLocalizedDescriptionKey: message
                                                };
                     
-                    //*error = [NSError errorWithDomain:GRTJsonSerializationErrorDomain code:GRTJsonSerializationErrorInvalidJsonObject userInfo:userInfo];
                     *error = [NSError errorWithDomain:@"domain Error" code:10 userInfo:userInfo];
                 }
                 
@@ -438,7 +437,7 @@
 
 
 + (NSDictionary *)CA_fetchObjectsForEntity:(NSEntityDescription *)entity withIdentifiers:(NSArray *)identifiers inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
-    NSString *identityKey = [[entity CA_identityAttribute] name];
+    NSString *identityKey = [[entity CA_coredataUniqueIdentifier] name];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     fetchRequest.entity = entity;

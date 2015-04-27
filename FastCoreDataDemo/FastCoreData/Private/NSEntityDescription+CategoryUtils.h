@@ -24,6 +24,6 @@
 
 @interface NSEntityDescription (CategoryUtils)
 
-- (NSAttributeDescription *)CA_identityAttribute;
+- (NSAttributeDescription *)CA_coredataUniqueIdentifier;
 
 @end
